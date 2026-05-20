@@ -33,7 +33,19 @@ export default function ProfileScreen() {
 
       const current = await Location.getCurrentPositionAsync({});
 
-      setLocation(current.coords);
+      const coords = current.coords;
+
+      setLocation(coords);
+      
+      const address = await getAddressFromCoords(
+        coords.latitude,
+        coords.longitude
+      );
+
+      setLocation({
+        ...coords,
+        address,
+      });
     } catch (err) {
       setError("Failed to get location");
     } finally {
@@ -44,6 +56,20 @@ export default function ProfileScreen() {
   useEffect(() => {
     getLocation();
   }, []);
+
+  const getAddressFromCoords = async (lat: number, lon: number) => {
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+      );
+
+      const data = await res.json();
+
+      return data.display_name;
+    } catch (err) {
+      return "Unable to fetch address";
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -80,6 +106,10 @@ export default function ProfileScreen() {
 
               <Text style={styles.text}>Longitude: {location.longitude}</Text>
             </>
+          )}
+
+          {location?.address && (
+            <Text style={styles.text}>Address: {location.address}</Text>
           )}
 
           <Text
