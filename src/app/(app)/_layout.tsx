@@ -1,10 +1,9 @@
 import LoadingScreen from "@/components/LoadingScreen";
 import { useAuthStore } from "@/store/authStore";
-import { Redirect, Stack } from "expo-router";
+import { Redirect, Slot } from "expo-router";
 
 export default function AppLayout() {
   const user = useAuthStore((state) => state.user);
-
   const isLoading = useAuthStore((state) => state.isLoading);
 
   if (isLoading) {
@@ -12,14 +11,8 @@ export default function AppLayout() {
   }
 
   if (!user) {
-    return <Redirect href="/login" />;
+    return <Redirect href="/(auth)/login" />;
   }
 
-  return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    />
-  );
+  return <Slot />;
 }

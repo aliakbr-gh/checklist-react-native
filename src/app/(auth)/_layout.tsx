@@ -14,7 +14,7 @@ export default function AuthLayout() {
   }
 
   if (user) {
-    return <Redirect href="/" />;
+    return <Redirect href="/(app)/(tabs)/profile" />;
   }
 
   return (

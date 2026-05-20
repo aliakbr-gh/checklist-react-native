@@ -11,6 +11,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text>
+        Logged In User:
       {JSON.stringify(user)}
       </Text>
       <CustomButton

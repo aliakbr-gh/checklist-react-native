@@ -34,7 +34,7 @@ export default function LoginScreen() {
   
     Alert.alert('Success', result.message);
   
-    router.replace('/');
+    router.replace("/(app)/(tabs)/profile");
   };
 
   return (
