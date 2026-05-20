@@ -34,6 +34,12 @@
             "imageWidth": 76
           }
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow app to use your camera"
+        }
       ]
     ],
     "experiments": {
